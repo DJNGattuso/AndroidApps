@@ -1,27 +1,26 @@
 package coen390.nicholas.savedataapp;
 
-//code provided in the assignment instruction - modified/included letter grade
-
 import java.util.Random;
 
-public class Assignment
+public class assignmentToDo
 {
     private static int assID = 0; //static ID increments with every new assignment
     private String assignmentTitle;
     private int assignmentGrade;
     private String letterGrade; //variable for the letter grades
+    String created_at;
 
-    //private constructor, increment ID
-    private Assignment(String title, int grade, String letter)
+    // constructor
+    public assignmentToDo(String assignmentTitle, int assignmentGrade, String letter)
     {
-        assignmentTitle = title;
-        assignmentGrade = grade;
-        letterGrade = letter;
+        this.assignmentTitle = assignmentTitle;
+        this.assignmentGrade = assignmentGrade;
+        this.letterGrade = letter;
         assID++;
     }
 
     //generate random assignment values
-    static public Assignment generateRandomAssignment()
+    static public assignmentToDo generateRandomAssignment()
     {
         Random rnd = new Random(); //create new random variable
         String tempTitle = "Assignment " + assID; //title of the assignment
@@ -42,10 +41,40 @@ public class Assignment
         else if (50 <= tempGrade && tempGrade < 53){ tempLetter = "D-";}
         else if (tempGrade < 50){ tempLetter = "F";}
 
-        return new Assignment(tempTitle, tempGrade, tempLetter);
+        return new assignmentToDo(tempTitle, tempGrade, tempLetter);
     }
 
-    public String getAssignmentTitle() {return assignmentTitle;}
-    public int getAssignmentGrade() {return assignmentGrade;}
-    public String getLetterGrade(){return  letterGrade;} //get letter grade
+    // setters
+    public void setAssTitle(String title)
+    {
+        this.assignmentTitle = title;
+    }
+
+    public void setAssGrade(int grade)
+    {
+        this.assignmentGrade = grade;
+    }
+
+    public void setCreatedAt(String created_at){
+        this.created_at = created_at;
+    }
+
+    // getters
+    public long getAssId()
+    {
+        return this.assID;
+    }
+
+    public String getAssignmentTitle() {
+        return this.assignmentTitle;
+    }
+
+    public String getLetterGrade() {
+        return this.letterGrade;
+    }
+
+    public int getAssGrade()
+    {
+        return this.assignmentGrade;
+    }
 }
