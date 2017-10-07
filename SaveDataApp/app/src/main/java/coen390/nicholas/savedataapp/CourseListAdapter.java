@@ -11,17 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-//class to custom adapter - followed youtube tutorial for understanding how to make a custom adapter -> https://www.youtube.com/watch?v+E^vE8fqQPTE
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import java.util.ArrayList;
-
 public class CourseListAdapter extends ArrayAdapter<Course>
 {
     private static final String TAG = "CourseListAdapter"; //tracking tag
@@ -45,7 +34,7 @@ public class CourseListAdapter extends ArrayAdapter<Course>
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
         String courseName = getItem(position).getCourseTitle(); //course name
-        ArrayList<Assignment> assignments = getItem(position).getAssignments(); //assignments for the course
+        ArrayList<assignmentToDo> assignments = getItem(position).getAssignments(); //assignments for the course
 
         Course course = new Course(courseName, assignments); //create course object
 
@@ -66,7 +55,7 @@ public class CourseListAdapter extends ArrayAdapter<Course>
             assignmentView.append("\n");
             if (gradeOption == 0) //keep grade number
             {
-                grades = Integer.toString(assignments.get(i).getAssignmentGrade()); //set grade text
+                grades = Integer.toString(assignments.get(i).getAssGrade()); //set grade text
             }
             else //view letters
             {
