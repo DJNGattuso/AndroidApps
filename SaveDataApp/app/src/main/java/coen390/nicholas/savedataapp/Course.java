@@ -9,10 +9,11 @@ import java.util.Random;
 
 public class Course
 {
-    private static int courseID = 0;
+    private static long courseID = 0;
     private String courseTitle;
     private ArrayList<assignmentToDo> assignments;
     private String letter;
+    private static int nmbCourses = 0;
 
     public Course(String title, ArrayList<assignmentToDo> assns)
     {
@@ -32,10 +33,12 @@ public class Course
             tempAssns.add(assignmentToDo.generateRandomAssignment());
         }
 
+        nmbCourses++;
         return new Course("Course " + courseID, tempAssns);
     }
 
     public String getCourseTitle() {return  courseTitle;}
     public ArrayList<assignmentToDo> getAssignments() {return  assignments;}
-    public int getCourseId() {return this.courseID;}
+    public long getCourseId() {return courseID;}
+    public static int getNmbCourses() {return nmbCourses;}
 }

@@ -8,11 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
     protected static final String TAG = "MainActivity"; //tag to log events
     protected Button goProfileButton = null; //button declaration
+    protected Button addCourseButton = null; //button declaration
+    private int nmbCourses;
+    Course tempCourse;
+    databaseSQL db;
+    ArrayList<assignmentToDo> tempAssignments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     protected void setupUI()
     {
         goProfileButton = (Button) findViewById(R.id.getGrades); //link button
+        addCourseButton = (Button) findViewById(R.id.addCourseButton); //link button
     }
 
     //function to go to profile page when button is pressed
@@ -34,6 +43,26 @@ public class MainActivity extends AppCompatActivity
         startActivity(startIntent);
     }
 
+    public void addCourse(View view)
+    {
+        //show at start of adding a course
+        Toast toast = Toast.makeText(getApplicationContext(), "Pressed" , Toast.LENGTH_SHORT);
+        toast.show();
+
+        nmbCourses = Course.getNmbCourses();
+        if (nmbCourses < 5)
+        {
+            tempCourse = Course.generateRandomCourse();
+            tempAssignments = tempCourse.getAssignments(); //assignments for temp
+
+            db.createCourseTable(tempCourse);
+
+            for (int i = 0; i <= tempAssignments.size(); i++)
+            {
+                db.createAssignmentTable(tempAssignments.get(i),tempCourse.getCourseId());
+            }
+        }
+    }
 
     protected void onStart()
     {

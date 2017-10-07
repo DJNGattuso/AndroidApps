@@ -1,19 +1,15 @@
 package coen390.nicholas.savedataapp;
 
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class gradeActivity extends AppCompatActivity
 {
     protected static final String TAG = "ProfileActivity"; //tag to log events
-
-    //declare variables
-    protected TextView testName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,13 +17,15 @@ public class gradeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grades);
         Log.d(TAG,"The onCreate() event");
-
-        setupUI();
     }
 
-    protected void setupUI()
+    //function to create the listview
+    public void setList(ArrayList<Course> object)
     {
-        //link to xml
-        testName = (TextView) findViewById(R.id.testID);
+        Log.d(TAG, "The setList event");
+        ListView gradesList = (ListView) findViewById(R.id.gradesList);
+
+        CourseListAdapter adapter = new CourseListAdapter(this, R.layout.grades_list, object);
+        gradesList.setAdapter(adapter);
     }
 }

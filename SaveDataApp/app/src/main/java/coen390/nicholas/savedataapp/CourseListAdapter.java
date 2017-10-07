@@ -17,15 +17,13 @@ public class CourseListAdapter extends ArrayAdapter<Course>
 
     private Context mContext;//variable for context
     int mResource; //variable for resource
-    int gradeOption; //variable for grade option
 
     //custom adapter
-    public CourseListAdapter(Context context, int resource, ArrayList<Course> objects, int gradeOptions)
+    public CourseListAdapter(Context context, int resource, ArrayList<Course> objects)
     {
         super(context, resource, objects); //calls existing
         mContext = context;
         mResource = resource;
-        gradeOption = gradeOptions;
     }
 
     //customizing the getView function
@@ -53,14 +51,9 @@ public class CourseListAdapter extends ArrayAdapter<Course>
         {
             assignmentView.append(assignments.get(i).getAssignmentTitle()); //set the assignment text
             assignmentView.append("\n");
-            if (gradeOption == 0) //keep grade number
-            {
-                grades = Integer.toString(assignments.get(i).getAssGrade()); //set grade text
-            }
-            else //view letters
-            {
-                grades = assignments.get(i).getLetterGrade(); //set letter grade
-            }
+
+            grades = Integer.toString(assignments.get(i).getAssGrade()); //set grade text
+
             gradeView.append(grades);
             gradeView.append("\n");
         }

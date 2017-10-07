@@ -119,7 +119,7 @@ public class databaseSQL extends SQLiteOpenHelper
         ct.setAssID(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_ID)));
         ct.setAssTitle(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_TITLE)));
         ct.setAssGrade(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_GRADE)));
-        
+
         return ct;
     }
 
