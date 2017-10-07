@@ -10,7 +10,9 @@ public class assignmentToDo
     private String letterGrade; //variable for the letter grades
     String created_at;
 
-    // constructor
+    // constructors
+    public assignmentToDo(){}
+
     public assignmentToDo(String assignmentTitle, int assignmentGrade, String letter)
     {
         this.assignmentTitle = assignmentTitle;
@@ -45,6 +47,11 @@ public class assignmentToDo
     }
 
     // setters
+    public void setAssID(int id)
+    {
+        this.assID = id;
+    }
+
     public void setAssTitle(String title)
     {
         this.assignmentTitle = title;
@@ -60,7 +67,7 @@ public class assignmentToDo
     }
 
     // getters
-    public long getAssId()
+    public int getAssId()
     {
         return this.assID;
     }

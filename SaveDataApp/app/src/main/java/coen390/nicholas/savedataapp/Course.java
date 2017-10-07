@@ -37,4 +37,5 @@ public class Course
 
     public String getCourseTitle() {return  courseTitle;}
     public ArrayList<assignmentToDo> getAssignments() {return  assignments;}
+    public int getCourseId() {return this.courseID;}
 }
