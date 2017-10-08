@@ -61,7 +61,7 @@ public class databaseSQL extends SQLiteOpenHelper
     }
 
     //----------------------------------------Creating the Assignment Table-------------------------------------------------
-    public long createAssignmentTable(assignmentToDo assignmentObject, long[] course_ids)
+    public long createAssignmentTable(assignmentToDo assignmentObject, long course_ids)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -70,10 +70,9 @@ public class databaseSQL extends SQLiteOpenHelper
         values.put(KEY_ASSIGNMENT_GRADE, assignmentObject.getAssGrade());
 
         long assignment_id = db.insert(TABLE_ASSIGNMENT, null, values);
-        for(long course_id: course_ids)
-        {
-            createCombo(assignment_id, course_id);
-        }
+
+        createCombo(assignment_id, course_ids);
+
         return assignment_id;
     }
 
@@ -91,7 +90,8 @@ public class databaseSQL extends SQLiteOpenHelper
     }
 
     //------------------------------------------Creating Combo Table---------------------------------------------------------
-    public long createCombo(long assignment_id, long course_id) {
+    public long createCombo(long assignment_id, long course_id)
+    {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 

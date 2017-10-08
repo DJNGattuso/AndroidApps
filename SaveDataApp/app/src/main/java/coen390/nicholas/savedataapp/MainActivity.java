@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG,"The onCreate() event");
+        db = new databaseSQL(getApplicationContext());
         setupUI();
     }
     protected void setupUI()
@@ -45,23 +46,27 @@ public class MainActivity extends AppCompatActivity
 
     public void addCourse(View view)
     {
-        //show at start of adding a course
-        Toast toast = Toast.makeText(getApplicationContext(), "Pressed" , Toast.LENGTH_SHORT);
-        toast.show();
-
         nmbCourses = Course.getNmbCourses();
         if (nmbCourses < 5)
         {
             tempCourse = Course.generateRandomCourse();
             tempAssignments = tempCourse.getAssignments(); //assignments for temp
 
+            Toast toast = Toast.makeText(getApplicationContext(), "Adding " + tempCourse.getCourseTitle() , Toast.LENGTH_SHORT);
+            toast.show();
             db.createCourseTable(tempCourse);
-
+            /*
             for (int i = 0; i <= tempAssignments.size(); i++)
             {
                 db.createAssignmentTable(tempAssignments.get(i),tempCourse.getCourseId());
-            }
+            }*/
         }
+        else
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "Must delete a course" , Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     protected void onStart()
