@@ -126,6 +126,7 @@ public class databaseSQL extends SQLiteOpenHelper
     }
 
     //----------------------------------Function to fetch all assignments------------------------------------------------
+    //reference: Cameron Hall -> provided assistance in this function
     public ArrayList<assignmentToDo> getAssCourse(String courseTitle)
     {
         ArrayList<assignmentToDo> allAss = new ArrayList<assignmentToDo>();
@@ -156,6 +157,7 @@ public class databaseSQL extends SQLiteOpenHelper
         return allAss;
     }
     //-------------------------------------Function to fetch all courses-------------------------------------------------
+    //reference: Cameron Hall -> provided assistance in this function
     public ArrayList<Course> getCourses()
     {
         ArrayList<Course> allCourses = new ArrayList<Course>();
