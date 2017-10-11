@@ -16,21 +16,21 @@ public class databaseSQL extends SQLiteOpenHelper
 
     //-------------------------------------------Setup Fields for Courses-------------------------------------------------
     private static final String TABLE_COURSES = "Courses";
-    private static final String KEY_COURSE_ID = "Course-ID";
-    private static final String KEY_COURSE_TITLE = "Course-Title";
+    private static final String KEY_COURSE_ID = "CourseID";
+    private static final String KEY_COURSE_TITLE = "CourseTitle";
     private static final String CREATE_TABLE_COURSE = "CREATE TABLE "+
             TABLE_COURSES + "(" + KEY_COURSE_ID + " INTEGER_PRIMARY_KEY," + KEY_COURSE_TITLE + " TEXT" + ")";
 
     //----------------------------------------Setup Fields for Assignments------------------------------------------------
     private static final String TABLE_ASSIGNMENT = "ASSIGNMENTS";
-    private static final String KEY_ASSIGNMENT_ID = "Ass-ID";
-    private static final String KEY_ASSIGNMENT_TITLE = "Ass-Title";
+    private static final String KEY_ASSIGNMENT_ID = "AssID";
+    private static final String KEY_ASSIGNMENT_TITLE = "AssTitle";
     private static final String KEY_ASSIGNMENT_GRADE = "Grade";
     private static final String CREATE_TABLE_ASSIGNMENT = "CREATE TABLE "+ TABLE_ASSIGNMENT + "(" + KEY_ASSIGNMENT_ID +
             " INTEGER_PRIMARY_KEY," + KEY_ASSIGNMENT_TITLE + " TEXT" + KEY_ASSIGNMENT_GRADE + " INTEGER" + ")";
 
     //------------------------------Setup Fields for Combination of Course + Assignments---------------------------------------
-    private static final String TABLE_COMBO = "COURSE WITH ASSIGNMENTS";
+    private static final String TABLE_COMBO = "COURSEWITHASSIGNMENTS";
     private static final String CREATE_TABLE_COMBO = "CREATE TABLE "+ TABLE_COMBO + "(" +
             KEY_ASSIGNMENT_ID + " INTEGER" + KEY_COURSE_ID + " INTEGER" + ")";
 
