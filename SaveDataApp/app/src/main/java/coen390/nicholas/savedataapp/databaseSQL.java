@@ -73,7 +73,7 @@ public class databaseSQL extends SQLiteOpenHelper
 
         long assignment_id = db.insert(TABLE_ASSIGNMENT, null, values);
 
-        createCombo(assignment_id, course_ids);
+        //createCombo(assignment_id, course_ids);
 
         return assignment_id;
     }

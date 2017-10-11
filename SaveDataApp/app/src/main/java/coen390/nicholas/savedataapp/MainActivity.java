@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity
             Toast toast = Toast.makeText(getApplicationContext(), "Adding " + tempCourse.getCourseTitle() , Toast.LENGTH_SHORT);
             toast.show();
             db.createCourseTable(tempCourse);
-            /*
+
             for (int i = 0; i <= tempAssignments.size(); i++)
             {
                 db.createAssignmentTable(tempAssignments.get(i),tempCourse.getCourseId());
-            }*/
+            }
         }
         else
         {
