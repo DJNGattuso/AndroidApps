@@ -139,20 +139,22 @@ public class databaseSQL extends SQLiteOpenHelper
 
         if (c.moveToFirst())
         {
-            while(c.moveToFirst())
+            do
             {
-                String Courseid = courseTitle.substring(courseTitle.length() - 1, courseTitle.length());
-                String Tableid = (c.getString(c.getColumnIndex(KEY_COURSE_ID)));
+                String courseid = courseTitle.substring(courseTitle.length() - 1, courseTitle.length());
+                String tableid = (c.getString(c.getColumnIndex(KEY_COURSE_ID)));
 
-                if (Courseid.equals(Tableid));
-                {
+                //if (courseid.equals((tableid)));
+                //{
+                    Log.e("add course","test");
                     assignmentToDo assignments = new assignmentToDo();
                     assignments.setAssTitle(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_TITLE)));
                     assignments.setAssGrade(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_GRADE)));
 
                     allAss.add(assignments);
-                }
+                //}
             }
+            while(c.moveToNext());
         }
         return allAss;
     }
@@ -170,17 +172,23 @@ public class databaseSQL extends SQLiteOpenHelper
 
         if (c.moveToFirst())
         {
-            Course temp = new Course();
-
-            while(c.moveToFirst())
+            do
             {
+                Course temp = new Course();
                 ArrayList<assignmentToDo> courseAss = getAssCourse(c.getString(c.getColumnIndex(KEY_COURSE_TITLE)));
                 temp.setAssi(courseAss);
                 temp.setTitle(c.getString(c.getColumnIndex(KEY_COURSE_TITLE)));
 
                 allCourses.add(temp);
             }
+            while(c.moveToNext());
         }
         return allCourses;
+    }
+
+    public void closeDB()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen()){db.close();}
     }
 }
