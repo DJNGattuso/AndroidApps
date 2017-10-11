@@ -15,6 +15,8 @@ public class Course
     private String letter;
     private static int nmbCourses = 0;
 
+    public Course(){}
+
     public Course(String title, ArrayList<assignmentToDo> assns)
     {
         courseTitle = title;
@@ -37,6 +39,8 @@ public class Course
         return new Course("Course " + courseID, tempAssns);
     }
 
+    public void setTitle(String title){this.courseTitle = title;}
+    public void setAssi(ArrayList<assignmentToDo> ass) { assignments = ass;}
     public String getCourseTitle() {return  courseTitle;}
     public ArrayList<assignmentToDo> getAssignments() {return  assignments;}
     public long getCourseId() {return courseID;}

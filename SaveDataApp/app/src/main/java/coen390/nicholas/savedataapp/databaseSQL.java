@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class databaseSQL extends SQLiteOpenHelper
 {
     //--------------------------------------------Initialize Database-----------------------------------------------------
@@ -123,4 +125,60 @@ public class databaseSQL extends SQLiteOpenHelper
         return ct;
     }
 
+    //----------------------------------Function to fetch all assignments------------------------------------------------
+    public ArrayList<assignmentToDo> getAssCourse(String courseTitle)
+    {
+        ArrayList<assignmentToDo> allAss = new ArrayList<assignmentToDo>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_ASSIGNMENT;
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst())
+        {
+            while(c.moveToFirst())
+            {
+                String Courseid = courseTitle.substring(courseTitle.length() - 1, courseTitle.length());
+                String Tableid = (c.getString(c.getColumnIndex(KEY_COURSE_ID)));
+
+                if (Courseid.equals(Tableid));
+                {
+                    assignmentToDo assignments = new assignmentToDo();
+                    assignments.setAssTitle(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_TITLE)));
+                    assignments.setAssGrade(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_GRADE)));
+
+                    allAss.add(assignments);
+                }
+            }
+        }
+        return allAss;
+    }
+    //-------------------------------------Function to fetch all courses-------------------------------------------------
+    public ArrayList<Course> getCourses()
+    {
+        ArrayList<Course> allCourses = new ArrayList<Course>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_COURSES;
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst())
+        {
+            Course temp = new Course();
+
+            while(c.moveToFirst())
+            {
+                ArrayList<assignmentToDo> courseAss = getAssCourse(c.getString(c.getColumnIndex(KEY_COURSE_TITLE)));
+                temp.setAssi(courseAss);
+                temp.setTitle(c.getString(c.getColumnIndex(KEY_COURSE_TITLE)));
+
+                allCourses.add(temp);
+            }
+        }
+        return allCourses;
+    }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class gradeActivity extends AppCompatActivity
 {
     protected static final String TAG = "ProfileActivity"; //tag to log events
+    protected ListView gradesList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
