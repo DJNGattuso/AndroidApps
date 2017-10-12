@@ -24,12 +24,14 @@ public class databaseSQL extends SQLiteOpenHelper
             TABLE_COURSES + "(" + KEY_COURSE_ID + " INTEGER_PRIMARY_KEY," + KEY_COURSE_TITLE + " TEXT" + ")";
 
     //----------------------------------------Setup Fields for Assignments------------------------------------------------
-    private static final String TABLE_ASSIGNMENT = "ASSIGNMENTS";
+    private static final String TABLE_ASSIGNMENT = "Assignments";
     private static final String KEY_ASSIGNMENT_ID = "AssID";
     private static final String KEY_ASSIGNMENT_TITLE = "AssTitle";
     private static final String KEY_ASSIGNMENT_GRADE = "Grade";
-    private static final String CREATE_TABLE_ASSIGNMENT = "CREATE TABLE "+ TABLE_ASSIGNMENT + "(" + KEY_ASSIGNMENT_ID +
-            " INTEGER_PRIMARY_KEY," + KEY_ASSIGNMENT_TITLE + " TEXT" + KEY_ASSIGNMENT_GRADE + " INTEGER" + ")";
+    private static final String KEY_ASSCourseID = "CourseASSid";
+    private static final String CREATE_TABLE_ASSIGNMENT = "CREATE TABLE "+ TABLE_ASSIGNMENT + "(" +
+            KEY_ASSIGNMENT_ID + " INTEGER_PRIMARY_KEY, " +KEY_ASSCourseID+" INTEGER, "+ KEY_ASSIGNMENT_TITLE +
+            " TEXT, " + KEY_ASSIGNMENT_GRADE + " INTEGER" + ")";
 
     //------------------------------Setup Fields for Combination of Course + Assignments---------------------------------------
     private static final String TABLE_COMBO = "COURSEWITHASSIGNMENTS";
@@ -63,35 +65,31 @@ public class databaseSQL extends SQLiteOpenHelper
     }
 
     //----------------------------------------Creating the Assignment Table-------------------------------------------------
-    public long createAssignmentTable(assignmentToDo assignmentObject, long course_ids)
+    public void createAssignmentTable(assignmentToDo assignmentObject, long course_ids)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ASSIGNMENT_ID, assignmentObject.getAssId());
         values.put(KEY_ASSIGNMENT_TITLE, assignmentObject.getAssignmentTitle());
         values.put(KEY_ASSIGNMENT_GRADE, assignmentObject.getAssGrade());
-
-        long assignment_id = db.insert(TABLE_ASSIGNMENT, null, values);
-
+        values.put(KEY_ASSCourseID,course_ids);
+        db.insert(TABLE_ASSIGNMENT, null, values);
         //createCombo(assignment_id, course_ids);
-
-        return assignment_id;
     }
 
     //---------------------------------------Creating the Course Table-------------------------------------------------------
-    public long createCourseTable(Course course)
+    public void createCourseTable(Course course)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(KEY_COURSE_ID, course.getCourseId());
         values.put(KEY_COURSE_TITLE, course.getCourseTitle());
-
-        long course_id = db.insert(TABLE_COURSES, null, values);
-        return course_id;
+        db.insert(TABLE_COURSES, null, values);
     }
 
     //------------------------------------------Creating Combo Table---------------------------------------------------------
+    /*
     public long createCombo(long assignment_id, long course_id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -102,7 +100,7 @@ public class databaseSQL extends SQLiteOpenHelper
 
         long id = db.insert(TABLE_COMBO, null, values);
         return id;
-    }
+    }*/
 
     //------------------------------------Function to get assignments from table--------------------------------------------
     public assignmentToDo getAssignment(long assignment_id)
@@ -142,17 +140,17 @@ public class databaseSQL extends SQLiteOpenHelper
             do
             {
                 String courseid = courseTitle.substring(courseTitle.length() - 1, courseTitle.length());
-                String tableid = (c.getString(c.getColumnIndex(KEY_COURSE_ID)));
+                String tableid= c.getString(c.getColumnIndex(KEY_ASSCourseID));
 
-                //if (courseid.equals((tableid)));
-                //{
-                    Log.e("add course","test");
+                if (courseid.equals((tableid)));
+                {
+                    Log.e("add course", "test");
                     assignmentToDo assignments = new assignmentToDo();
                     assignments.setAssTitle(c.getString(c.getColumnIndex(KEY_ASSIGNMENT_TITLE)));
                     assignments.setAssGrade(c.getInt(c.getColumnIndex(KEY_ASSIGNMENT_GRADE)));
 
                     allAss.add(assignments);
-                //}
+                }
             }
             while(c.moveToNext());
         }

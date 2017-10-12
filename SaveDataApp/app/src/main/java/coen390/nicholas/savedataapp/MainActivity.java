@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
             toast.show();
             db.createCourseTable(tempCourse);
 
-            for (int i = 0; i <= tempAssignments.size(); i++)
+            for (int i = 0; i <= tempAssignments.size() - 1; i++)
             {
                 db.createAssignmentTable(tempAssignments.get(i),tempCourse.getCourseId());
             }
