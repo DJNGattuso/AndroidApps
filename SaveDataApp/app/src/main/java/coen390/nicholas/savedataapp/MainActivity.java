@@ -3,8 +3,6 @@ package coen390.nicholas.savedataapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +16,7 @@ public class MainActivity extends AppCompatActivity
     protected Button goProfileButton = null; //button declaration
     protected Button addCourseButton = null; //button declaration
     private int nmbCourses;
+    ArrayList<Course> dbCourses;
     Course tempCourse;
     databaseSQL db;
     ArrayList<assignmentToDo> tempAssignments;
@@ -46,7 +45,9 @@ public class MainActivity extends AppCompatActivity
 
     public void addCourse(View view)
     {
-        nmbCourses = Course.getNmbCourses();
+        dbCourses = db.getCourses();
+        nmbCourses = dbCourses.size();
+
         if (nmbCourses < 5)
         {
             tempCourse = Course.generateRandomCourse();

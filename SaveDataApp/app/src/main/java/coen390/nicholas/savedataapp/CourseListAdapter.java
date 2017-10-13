@@ -18,6 +18,8 @@ public class CourseListAdapter extends ArrayAdapter<Course>
     private Context mContext;//variable for context
     int mResource; //variable for resource
 
+    databaseSQL db;
+
     //custom adapter
     public CourseListAdapter(Context context, int resource, ArrayList<Course> objects)
     {
@@ -31,8 +33,10 @@ public class CourseListAdapter extends ArrayAdapter<Course>
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
     {
-        String courseName = getItem(position).getCourseTitle(); //course name
-        ArrayList<assignmentToDo> assignments = getItem(position).getAssignments(); //assignments for the course
+        db = new databaseSQL(mContext);
+        ArrayList<Course> allCourses = db.getCourses();
+        String courseName = allCourses.get(position).getCourseTitle();
+        ArrayList<assignmentToDo> assignments = db.getAssCourse(courseName); //assignments for the course
 
         Course course = new Course(courseName, assignments); //create course object
 

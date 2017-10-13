@@ -13,7 +13,6 @@ public class Course
     private String courseTitle;
     private ArrayList<assignmentToDo> assignments;
     private String letter;
-    private static int nmbCourses = 0;
 
     public Course(){}
 
@@ -35,7 +34,6 @@ public class Course
             tempAssns.add(assignmentToDo.generateRandomAssignment());
         }
 
-        nmbCourses++;
         return new Course("Course " + courseID, tempAssns);
     }
 
@@ -44,5 +42,4 @@ public class Course
     public String getCourseTitle() {return  courseTitle;}
     public ArrayList<assignmentToDo> getAssignments() {return  assignments;}
     public long getCourseId() {return courseID;}
-    public static int getNmbCourses() {return nmbCourses;}
 }
