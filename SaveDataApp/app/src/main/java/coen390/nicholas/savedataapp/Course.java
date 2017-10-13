@@ -38,6 +38,7 @@ public class Course
     }
 
     public void setTitle(String title){this.courseTitle = title;}
+    public void setCourseID(long id){ courseID = id;}
     public void setAssi(ArrayList<assignmentToDo> ass) { assignments = ass;}
     public String getCourseTitle() {return  courseTitle;}
     public ArrayList<assignmentToDo> getAssignments() {return  assignments;}

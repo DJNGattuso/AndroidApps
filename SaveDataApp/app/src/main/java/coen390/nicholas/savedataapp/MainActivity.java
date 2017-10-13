@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -13,8 +14,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 {
     protected static final String TAG = "MainActivity"; //tag to log events
-    protected Button goProfileButton = null; //button declaration
+    protected Button goGradeButton = null; //button declaration
     protected Button addCourseButton = null; //button declaration
+    protected Button deleteBut = null; //button declaration
+    protected EditText deleteT = null;
+
     private int nmbCourses;
     ArrayList<Course> dbCourses;
     Course tempCourse;
@@ -32,8 +36,10 @@ public class MainActivity extends AppCompatActivity
     }
     protected void setupUI()
     {
-        goProfileButton = (Button) findViewById(R.id.getGrades); //link button
+        goGradeButton = (Button) findViewById(R.id.getGrades); //link button
         addCourseButton = (Button) findViewById(R.id.addCourseButton); //link button
+        deleteBut = (Button) findViewById(R.id.Deletebutton);
+        deleteT = (EditText) findViewById(R.id.deleteText);
     }
 
     //function to go to profile page when button is pressed
@@ -68,6 +74,14 @@ public class MainActivity extends AppCompatActivity
             toast.show();
         }
 
+    }
+
+    public void deleteCourse(View v)
+    {
+        String text = deleteT.getText().toString();
+        Course courseDelete = db.getCourse(text);
+
+        db.deleteCourse(courseDelete, false);
     }
 
     protected void onStart()

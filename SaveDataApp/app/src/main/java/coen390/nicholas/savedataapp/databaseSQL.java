@@ -102,6 +102,26 @@ public class databaseSQL extends SQLiteOpenHelper
         return id;
     }*/
 
+    //------------------------------------Function to get course from table--------------------------------------------
+    public Course getCourse(String courseTitle)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_COURSES + " WHERE " + KEY_COURSE_TITLE + " = " + courseTitle;
+
+        Log.e(LOG,selectQuery);
+        Cursor c = db.rawQuery(selectQuery, null);
+        if(c != null)
+        {
+            c.moveToFirst();
+        }
+
+        Course ct = new Course();
+        ct.setCourseID(c.getInt(c.getColumnIndex(KEY_COURSE_ID)));
+        ct.setTitle(c.getString(c.getColumnIndex(KEY_COURSE_TITLE)));
+
+        return ct;
+    }
+
     //------------------------------------Function to get assignments from table--------------------------------------------
     public assignmentToDo getAssignment(long assignment_id)
     {
@@ -182,6 +202,25 @@ public class databaseSQL extends SQLiteOpenHelper
             while(c.moveToNext());
         }
         return allCourses;
+    }
+
+    //------------------------------------Function to delete a course from table--------------------------------------------
+    public void deleteCourse(Course course, boolean should_delete_all_courses_assignments)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        /*
+        if (should_delete_all_courses_assignments) {
+
+            ArrayList<assignmentToDo> allAsignments = getAssCourse(course.getCourseTitle());
+
+            for (assignmentToDo assignment : allAsignments)
+            {
+                deleteAssignment(assignment.getAssignmentID());
+            }
+        }
+        */
+        db.delete(TABLE_COURSES, KEY_COURSE_ID + " = ?",
+                new String[]{String.valueOf(course.getCourseId())});
     }
 
     public void closeDB()
