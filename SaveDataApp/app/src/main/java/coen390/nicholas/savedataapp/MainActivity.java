@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
 
         if (nmbCourses < 5)
         {
-            tempCourse = Course.generateRandomCourse();
+            Course tempCourse = Course.generateRandomCourse();
             tempAssignments = tempCourse.getAssignments(); //assignments for temp
 
             Toast toast = Toast.makeText(getApplicationContext(), "Adding " + tempCourse.getCourseTitle() , Toast.LENGTH_SHORT);
